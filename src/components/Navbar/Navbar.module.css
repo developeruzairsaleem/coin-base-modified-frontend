@@ -1,0 +1,83 @@
+.navbar{
+    display: flex;
+    align-items: center;
+justify-content: space-around;
+    margin: 20px auto;
+    padding: 20px 0;
+    width: 80%;
+}
+
+.logo{
+    font-size: 32px;
+    font-weight: 800;
+}
+.activeStyle{
+    font-weight: bold;
+    font-size: 22px;
+    color: #3861fb;
+
+}
+
+.inActiveStyle{
+    font-weight: bold;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.logInButton{
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+
+}
+
+.logInButton:hover{
+    color: black;
+    background-color: #f3f3f3;
+}
+
+
+.signUpButton{
+    margin-left: 10px;
+    background-color: #3861fb;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+}
+
+.signUpButton:hover{
+
+background-color: #1f4ffd;
+color: white;
+}
+
+.logoutButton{
+    margin-left: 10px;
+    background-color: #ea3943;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+}
+.logoutButton:hover{
+    background-color: #e01822;
+}
+.separator{
+    height: 1px;
+    margin-top: 10px;
+    background: linear-gradient(to right, transparent,#9ba3c2,transparent);
+}

@@ -1,0 +1,52 @@
+.wrapper{
+    margin: 0 auto;
+    width: 80vw;
+    /* height: calc(100vh - 200px); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header{
+    font-size: 48px;
+    text-align: center;
+    font-weight: bold;
+    width: inherit;
+    margin: 20px 0;
+}
+
+.content{
+ padding: 18px 30px;
+ margin: 15px;
+ width: 60%;
+ outline: none;
+ border-radius: 10px;
+font-size: 20px;
+min-height: 200px;
+border: 1px solid #fff;
+}
+.photoPrompt{
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 50px;
+width: 60%;
+font-size: 20px;
+}
+.submit{
+background-color: #3861fb;
+color: #fff;
+border-radius: 10px;
+border:none;
+outline: none;
+font-weight: bold;
+width: 30%;
+padding: 15px 30px;
+margin: 40px;
+cursor: pointer;
+
+}
+.submit:hover, .submit:disabled{
+    background-color: #6889ff;
+}
