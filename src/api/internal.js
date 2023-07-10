@@ -63,7 +63,8 @@ export const submitBlog= async (data)=>{
         response= await api.post("/blog",data);
     }
     catch(error){
-        return error;
+    console.log(error);
+    return  error;
     }
     return response;
 }
