@@ -45,7 +45,7 @@ function Blog(){
   <div className={styles.blogsWrapper}>
 {
   blogs.map((blog)=>(
-<div className={styles.blog} onClick={_=>navigate(`/blog/${blog._id}`)}>
+<div key={blog._id} className={styles.blog} onClick={_=>navigate(`/blog/${blog._id}`)}>
 <h2 className={styles.title}>{blog.title}</h2>
 <img className={styles.photo} src={blog.photo} />
 <p className={styles.content}>
