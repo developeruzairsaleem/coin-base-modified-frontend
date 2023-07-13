@@ -8,7 +8,7 @@ export const getNews= async()=>{
 let response;
 try{
     response= await axios.get(NEWS_API_ENDPOINT);
-    response= response.data.articles.slice(0,15);
+    response= response.data.articles.slice(0,12);
 
 }
 catch(error){
