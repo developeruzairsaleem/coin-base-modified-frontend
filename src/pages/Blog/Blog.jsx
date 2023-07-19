@@ -7,17 +7,50 @@ import { useNavigate } from "react-router-dom";
 
 
 function Blog(){
- const navigate=useNavigate()
+const [i,setI]=useState(0)
+const [length,setLength]=useState(0)
 
+
+
+const handleNext=()=>{
+if(i<length-10){
+  setI(i+10)
+
+}
+
+}
+
+const handlePrevious=()=>{
+  if(i>0){
+    setI(i-10)
+
+  }
+}
+
+
+ const navigate=useNavigate()
+const blogStyle=(url)=>{
+  return {
+    background: `url(${url})`,
+    backgroundPosition:"center",
+    backgroundRepeat:"no-repeat",
+    backgroundSize:"cover",
+    width:"200px",
+    height:"200px",
+  }
+}
 
     const[blogs,setBlogs]=useState([])
+    const [content,setContent]=useState("")
+  
     useEffect(() => {
     (async _=>{
     
-      let response=  await blogAll() 
+      let response=  await blogAll(i) 
 
         if(response.status===200){
           setBlogs(response.data.blogs)
+          setLength(response.data.length)
         }
     
     
@@ -29,7 +62,7 @@ function Blog(){
     
     
     
-    }, [])
+    }, [i])
   
     
 
@@ -45,17 +78,39 @@ function Blog(){
   <div className={styles.blogsWrapper}>
 {
   blogs.map((blog)=>(
+
 <div key={blog._id} className={styles.blog} onClick={_=>navigate(`/blog/${blog._id}`)}>
+<div className={styles.photoCover} style={blogStyle(blog.photo)}>
+{/* <img className={styles.photo} src={blog.photo} /> */}
+</div>
+<div className={styles.textCover}>
 <h2 className={styles.title}>{blog.title}</h2>
-<img className={styles.photo} src={blog.photo} />
+
 <p className={styles.content}>
-  {blog.content}
+  
+  {
+`${blog.content.replace(/\|n\|/g,'\n') }
+   ` }
 </p>
 </div>
-
+</div>
   ))
 }
+
+
+
+
+<div className={styles.buttonSection}>
+  <button disabled={i===0} onClick={handlePrevious}>Previous Page</button>
+  <button disabled={i>=length-10} onClick={handleNext}>Next Page</button>
+</div>
   </div>
+
+
+
+
+
+
     )
 }
 

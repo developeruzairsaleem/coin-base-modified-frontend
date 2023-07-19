@@ -4,11 +4,11 @@ const api= axios.create({
     baseURL: process.env.REACT_APP_INTERNAL_API_PATH,
     withCredentials:true,
     headers: {
-        "Content-Type":"application/json"  
+        "Content-Type":"application/json"
     },
-})
+}) 
 
-export const login= async(data)=>{
+export const login= async(data)=>{ 
 let response;
 
     try{
@@ -43,10 +43,10 @@ export const signout= async()=>{
 
     return response
 }
-export const blogAll= async()=>{
+export const blogAll= async(data)=>{
     let response;
     try{
-        response= await api.get("/blog/all")
+        response= await api.get("/blog/all/"+data)
         
 
     }
@@ -82,7 +82,7 @@ catch(error){
 return response;
 }
 
-export const getCommentsById = async(id)=>{
+export const getCommentsById = async(id)=>{ 
     let response;
     try{
         response= await api.get("/comment/"+id,{validateStatus:false})

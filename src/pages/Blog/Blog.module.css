@@ -1,3 +1,4 @@
+
 .blogsWrapper{
     margin: 50px 0;
     display: flex;
@@ -9,15 +10,17 @@
 
 .blog{
     width: 80%;
-    border: 1px solid #fff;
-    background-color: black;
+    /* border: 1px solid #202020; */
+    background-color: rgb(230, 230, 230);
     padding: 16px;
+    color:black;
     border-radius: 10px;
     margin: 40px 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    justify-content: left;
+    gap: 5rem;
 }
 .blog:hover .title{
     color:#3861fb
@@ -26,15 +29,21 @@
 .title{
 text-align: left;
 margin: 15px 0;
-background-color: transparent;
-color: #fff;
+/* background-color: transparent; */
+background-color: inherit;
+font-size: 2.5rem;
+/* color: #fff; */
 }
-.photo{
-width: 260px;
-border-radius: 10px;
+
+.textCover{
+background-color: inherit;
 }
+
 .content{
+    background-color: inherit;
 margin-top: 20px;
 font-weight: bold;
-text-align: center;
+text-align: left;
+white-space: pre-line;
+
 }

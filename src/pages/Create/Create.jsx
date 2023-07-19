@@ -12,8 +12,11 @@ function Create(){
 const navigate=useNavigate()
 
 const handleSubmit=async ()=>{
+
+let str= content.replace(/\n/g,'|n|')
+
   let data={
-    title,content,photo,author
+    title,content:str,photo,author
   }
   const response=  await submitBlog(data)
 if(response.status===201){
@@ -56,9 +59,15 @@ return (
     name="content"
     value={content}
     className={styles.content}
-    maxLength={400}
+    // maxLength={400}
     placeholder="Your content goes here ..."
-    onChange={(e)=>setContent(e.target.value)}
+    onChange={(e)=>{
+  
+    setContent(e.target.value)
+console.log(content)
+
+
+      }}
    />
    <div className={styles.photoPrompt} >
     <p>Choose a photo</p>
