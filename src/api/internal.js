@@ -140,7 +140,7 @@ api.interceptors.response.use(
     if((error.response.status===401||error.response.status===500)&&originalReq&&!originalReq._isRetry){
         originalReq._isRetry=true;
         try {
-            axios.get(`${process.env.REACT_APP_INTERNAL_API_PATH}/refresh`,{withCredentials:true})
+           await axios.get(`${process.env.REACT_APP_INTERNAL_API_PATH}/refresh`,{withCredentials:true})
             return api.request(originalReq)
         } catch (error) {
             return error
