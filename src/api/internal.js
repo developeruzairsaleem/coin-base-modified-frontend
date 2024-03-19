@@ -135,12 +135,12 @@ export const updateBlog= async (data,id)=>{
 
 api.interceptors.response.use(
  config=>config   ,
- async (error)=>{  
+ async (error)=>{
     const originalReq= error.config
     if((error.response.status===401||error.response.status===500)&&originalReq&&!originalReq._isRetry){
         originalReq._isRetry=true;
         try {
-           await axios.get(`${process.env.REACT_APP_INTERNAL_API_PATH}/refresh`,{withCredentials:true})
+            axios.get(`${process.env.REACT_APP_INTERNAL_API_PATH}/refresh`,{withCredentials:true})
             return api.request(originalReq)
         } catch (error) {
             return error
@@ -148,4 +148,4 @@ api.interceptors.response.use(
     }
  }
 
-)  
+)
