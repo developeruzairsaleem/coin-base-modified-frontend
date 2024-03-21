@@ -14,7 +14,7 @@
     width: 20%;
     /* overflow: hidden; */
     cursor: pointer;
-    margin: 40px 20px;
+    margin: 1rem 1rem;
     padding: 16px;
     display: flex;
     align-items: center;
@@ -22,7 +22,8 @@
 /*    background-color:blue;*/
     flex-direction: column;
     gap: 1rem;
-    height:20rem;
+/*    background-color:blue;*/
+    height:15rem;
 }
 .header{
 font-size: 32px;

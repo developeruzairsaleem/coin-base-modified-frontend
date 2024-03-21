@@ -49,7 +49,7 @@ if (articles.length==0){
             <div key={article.url} onMouseEnter={handleEnter(index)} onMouseLeave={handleLeave()} className={styles.card} onClick={()=>handleCardClick(article.url)}>
             <div style={photoStyle(article.urlToImage)} className={`${styles.imageContainer}`}>
             </div>
-            <h3 className={` ${index===activeIndex&&styles.activeCard}`}>{article.title}</h3>
+            <h3 className={` ${index===activeIndex&&styles.activeCard}`}>{article.title.split("").slice(0,40).join('')+"..."}</h3>
             </div>
         ))
     }
