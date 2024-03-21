@@ -19,7 +19,7 @@ const isAuthenticated= useSelector(state=>state.user.auth);
         <>
             <nav className={styles.navbar}>
                 <div className={styles.left}>
-            <NavLink to="/" className={`${styles.logo} ${styles.inActiveStyle}`}>Coin Base</NavLink>
+            <NavLink to="/" className={`${styles.logo} ${styles.inActiveStyle}`}>{"Coin Bounce"}</NavLink>
 
                 </div>
                 <div className={styles.center}>

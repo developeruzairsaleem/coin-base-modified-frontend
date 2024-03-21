@@ -149,17 +149,6 @@ function App() {
             />
 
 
-            <Route
-              path="/"
-              exact
-              element={
-                <div className={styles.main}>
-                  <Home />
-                </div>
-              }
-            />
-
-
               <Route path="*" element={
                 <div className={styles.main} >
                   <Error/>

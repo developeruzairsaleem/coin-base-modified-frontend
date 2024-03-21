@@ -1,10 +1,10 @@
 .container{
-    margin: 20px;
+/*    margin: 20px;*/
 }
 .layout{
     display: flex;
     flex-direction: column;
-    min-height: 95vh;
+    min-height: 100vh;
     /* background-color: blue; */
 }
 .main{
