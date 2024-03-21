@@ -5,7 +5,20 @@ import Loader from "../../components/Loader/Loader";
 function Home (){
 
     const [articles,setArticles]= useState([]);
+    const [activeIndex, setActiveIndex] =useState(-1)
 
+    const handleEnter=(index)=>(e)=>setActiveIndex(index) 
+    const handleLeave=(index)=>(e)=>setActiveIndex(-1)
+
+    const photoStyle=url=>({
+    border:'3px solid #3861fb',
+    width:'100%',
+    backgroundImage:`url(${url})`,
+    backgroundSize:'cover',
+    backgroundPosition:'center',
+    height:'150px'
+    })
+    
     useEffect(() => {
 
         (async function (){
@@ -32,10 +45,11 @@ if (articles.length==0){
     <div className={styles.header}> Latest Articles </div>
     <div className={styles.grid}>
     {
-        articles.map((article)=> (
-            <div key={article.url} className={styles.card} onClick={()=>handleCardClick(article.url)}>
-            <img src={article.urlToImage}/>
-            <h3>{article.title}</h3>
+        articles.map((article,index)=> (
+            <div key={article.url} onMouseEnter={handleEnter(index)} onMouseLeave={handleLeave()} className={styles.card} onClick={()=>handleCardClick(article.url)}>
+            <div style={photoStyle(article.urlToImage)} className={`${styles.imageContainer}`}>
+            </div>
+            <h3 className={` ${index===activeIndex&&styles.activeCard}`}>{article.title}</h3>
             </div>
         ))
     }

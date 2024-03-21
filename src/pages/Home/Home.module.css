@@ -9,6 +9,7 @@
 }
 .card{
 /*    background-color: black;*/
+    color:black;
     border: 1px solid #fff;
     width: 20%;
     /* overflow: hidden; */
@@ -17,9 +18,11 @@
     padding: 16px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: justify;
+/*    background-color:blue;*/
     flex-direction: column;
-
+    gap: 1rem;
+    height:20rem;
 }
 .header{
 font-size: 32px;
@@ -29,15 +32,23 @@ display: flex;
 justify-content: center;
 }
 
+.imageContainer{
+    border-radius: 10px;
+
+}
+
 
 .card img{
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .card h3{
     text-align: left;
     background-color: transparent;
-    color: #fff;
     margin-top: 15px;
+}
+
+.activeCard{
+    color: #3861fb;
 }
