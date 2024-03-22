@@ -88,3 +88,9 @@ color: white;
     margin-top: 10px;
     background: linear-gradient(to right, transparent,#9ba3c2,transparent);
 }
+
+
+.authBtn{
+
+    color:inherit;
+}

@@ -6,6 +6,8 @@ import { resetUser } from "../../store/userSlice";
 import { useDispatch } from "react-redux";
 function Navbar(){
 
+
+
 const dispatch=useDispatch()
     const handleSignout= async()=>{
 
@@ -26,8 +28,18 @@ const isAuthenticated= useSelector(state=>state.user.auth);
 
             <NavLink to ="/" className={({isActive})=> isActive?styles.activeStyle:styles.inActiveStyle}>Home</NavLink>
             <NavLink to="crypto" className={({isActive})=>isActive?styles.activeStyle:styles.inActiveStyle}>CryptoCurrencies</NavLink>
-            <NavLink to="blogs" className={({isActive})=>isActive?styles.activeStyle:styles.inActiveStyle}>Blogs</NavLink>
-            <NavLink to="submit" className={({isActive})=>isActive?styles.activeStyle:styles.inActiveStyle}>Submit a blog</NavLink>
+            
+            
+            <NavLink to={isAuthenticated?"blogs":"login"} className={({isActive})=>isActive&&isAuthenticated?styles.activeStyle:styles.inActiveStyle}>
+                   Blogs
+              
+            </NavLink>
+            
+
+            <NavLink to={isAuthenticated?"submit":"login"}  className={({isActive})=>isActive&&isAuthenticated?styles.activeStyle:styles.inActiveStyle}>
+                Submit a blog
+               
+            </NavLink>
                 </div>
 
                 <div className={styles.right}>

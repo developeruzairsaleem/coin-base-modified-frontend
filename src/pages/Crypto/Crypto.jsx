@@ -22,7 +22,7 @@ useEffect(() => {
     // IIFE
     ( async _=>{
         const response = await getCrypto();
-        setData(response)
+        setData(response.length?response:["nocoins"])
     })();
     // Cleanup code
     setData([])
@@ -34,6 +34,11 @@ if(data.length===0){
     return(
     <Loader text= "Crypto " />
     )
+}
+if(data[0]==="nocoins"){
+    return (
+        <h1>No coins found</h1>
+        )
 }
 
 const negativeStyle={

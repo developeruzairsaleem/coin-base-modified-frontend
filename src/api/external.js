@@ -17,7 +17,7 @@ catch(error){
 return response
 }
 export const getCrypto=async()=>{
-    let response;
+    let response=[];
     try{
         response=await axios.get(CRYPTO_API_ENDPOINT);
         response= response.data;
@@ -25,5 +25,5 @@ export const getCrypto=async()=>{
     catch(error){
        console.log(error)
     }
-    return response
+    return response;
 }
