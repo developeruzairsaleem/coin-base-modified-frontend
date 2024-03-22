@@ -41,7 +41,7 @@ if (articles.length==0){
 }
 
     return ( 
-<>
+<div>
     <div className={styles.header}> Latest Articles </div>
     <div className={styles.grid}>
     {
@@ -55,7 +55,7 @@ if (articles.length==0){
     }
 
     </div>
-</>
+</div>
     )
 }
 
