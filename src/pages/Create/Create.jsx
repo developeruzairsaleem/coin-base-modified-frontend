@@ -23,7 +23,7 @@ const handleSubmit=async ()=>{
 let str= content.replace(/\n/g,'|n|')
 
   let data={
-    title,content:str,photo,author
+    title,content:str,photo,author,description
   }
   const response=  await submitBlog(data)
 if(response.status===201){
