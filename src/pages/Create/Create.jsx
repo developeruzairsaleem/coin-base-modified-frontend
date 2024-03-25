@@ -12,6 +12,13 @@ function Create(){
 const navigate=useNavigate()
 
 const handleSubmit=async ()=>{
+ const contentStruct = {
+    "text":'some random text',
+    "bold":true,
+    "italic":true,
+    "underline":true,
+    "fontsize":10
+  }
 
 let str= content.replace(/\n/g,'|n|')
 
@@ -38,6 +45,8 @@ const reader= new FileReader();
 
 const [title,setTitle]=useState("");
 const [content,setContent]=useState("");
+const [description,setDescription]=useState("");
+
 const [photo,setPhoto]=useState("");
 const author = useSelector((state)=>state.user._id)
 
@@ -55,6 +64,25 @@ return (
       placeholder="title"
       style={{width:"60%"}}
     />
+   
+
+
+
+    <textarea 
+    name="description"
+    value={description}
+    className={styles.description}
+    placeholder="Your description goes here ..."
+    onChange={(e)=>{
+  
+    setDescription(e.target.value)
+    console.log(description)
+
+
+      }}
+   />
+
+
    <textarea 
     name="content"
     value={content}
