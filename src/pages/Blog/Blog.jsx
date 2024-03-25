@@ -7,8 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 
 function Blog(){
-const [i,setI]=useState(0)
-const [length,setLength]=useState(0)
+  const [i,setI]=useState(0)
+  const [length,setLength]=useState(0)
+
+
+
+  // navigate to the specific blog post detail page
+  const navigateToBlogDetail=(blogId)=>()=>{
+    navigate(`/blog/${blogId}`)
+  }
 
 
 
@@ -79,20 +86,19 @@ const blogStyle=(url)=>{
 {
   blogs.map((blog)=>(
 
-<div key={blog._id} className={styles.blog} onClick={_=>navigate(`/blog/${blog._id}`)}>
-<div className={styles.photoCover} style={blogStyle(blog.photo)}>
-{/* <img className={styles.photo} src={blog.photo} /> */}
-</div>
-<div className={styles.textCover}>
-<h2 className={styles.title}>{blog.title}</h2>
+<div key={blog._id} className={styles.blog} onClick={navigateToBlogDetail(blog._id)}>
+  <div className={styles.photoCover} style={blogStyle(blog.photo)}>
+  </div>
+  <div className={styles.textCover}>
+  <h2 className={styles.title}>{blog.title}</h2>
 
-<p className={styles.content}>
-  
-  {
-`${blog.content.replace(/\|n\|/g,'\n') }
-   ` }
-</p>
-</div>
+  <p className={styles.content}>
+    
+    {
+  `${blog.content.replace(/\|n\|/g,'\n') }
+     ` }
+  </p>
+  </div>
 </div>
   ))
 }
