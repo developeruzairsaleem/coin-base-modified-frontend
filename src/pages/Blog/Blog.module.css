@@ -1,45 +1,56 @@
 
 .blogsWrapper{
-    margin: 50px 0;
+    margin: 50px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
     flex-wrap: wrap;
+    max-width: 1300px;
+    width: 100%;
 }
 
 .blog{
-    width: 80%;
-    padding: 16px;
+    width: 100%;
+    padding: 1rem;
     color:black;
-    border-radius: 10px;
-    margin: 40px 20px;
     display: flex;
-    justify-content: left;
-    gap: 5rem;
+    gap: 3rem;
+    justify-content:space-between;
 }
 .blog:hover .title{
     color:#3861fb
 }
 
 .title{
-text-align: left;
-margin: 15px 0;
-/* background-color: transparent; */
-background-color: inherit;
-font-size: 2.5rem;
-/* color: #fff; */
+    text-align: left;
+    margin: 15px 0;
+/*    background-color: inherit;*/
+    font-size: 2rem;
 }
 
 .textCover{
-background-color: inherit;
+    background-color: inherit;  
+    width:70%;
+}
+.photoCover{
+    width: 30%;
+    height: 300px;
+    border-radius: 20px;
 }
 
 .content{
     background-color: inherit;
-margin-top: 20px;
-font-weight: bold;
-text-align: left;
-white-space: pre-line;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: left;
+    white-space: pre-line;
+}
 
+.description{
+    background-color: inherit;
+    font-size:1.2rem;
+    line-height: 1.3;
+/*    letter-spacing: 1px;*/
+    word-spacing: 3px;
+    color: grey;
 }

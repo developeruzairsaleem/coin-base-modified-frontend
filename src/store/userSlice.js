@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-      _id:"",
-      username:"",
-      email:"",
-      auth:false
-
+  _id:"",
+  username:"",
+  email:"",
+  auth:false,
+  profilePhoto:"",
+  name:""
 }
 
 export const userSlice = createSlice({
@@ -13,12 +14,14 @@ name:"user",
 initialState:initialState,
 reducers:{
     setUser:(state,action)=>{
-        const {_id,username,email,auth}=action.payload;
+        const {_id,username,name,profilePhoto,email,auth}=action.payload;
 
         state._id=_id;
         state.username=username;
         state.email=email;
-        state.auth=auth
+        state.auth=auth;
+        state.profilePhoto=profilePhoto;
+        state.name  = name;
 
     },
     resetUser:(state,action)=>{
@@ -26,6 +29,8 @@ reducers:{
         state.username="";
         state.email="";
         state.auth=false;
+        state.profilePhoto="";
+        state.name= "";
     }
 }
 })

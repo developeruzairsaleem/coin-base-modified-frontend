@@ -26,7 +26,9 @@ const user={
     _id:response.data.user._id,
     email:response.data.user.email,
     username:response.data.user.username,
-    auth:response.data.auth
+    auth:response.data.auth,
+    name:response.data.name||"",
+    profilePhoto:response.data.profilePhoto||""
     
 }
 
@@ -36,7 +38,7 @@ navigate("/");
 }
 else if(response.code==="ERR_BAD_REQUEST"){
     // display error
-setError(response.response.data.message)
+setError(response.data.message)
 }
 
     }

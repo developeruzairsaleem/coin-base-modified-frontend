@@ -15,6 +15,7 @@ import BlogDetail  from "./pages/BlogDetail/BlogDetail.jsx"
 import UpdateBlog from "./pages/UpdateBlog/UpdateBlog.jsx"
 import Loader from "./components/Loader/Loader.jsx";
 import useAutoLogin from "./hooks/useAutoLogin.js"
+import ProfileUpdate from "./pages/ProfileUpdate/ProfileUpdate.jsx"
 function App() {
   const isAuth= useSelector(state=>state.user.auth);
   
@@ -44,7 +45,18 @@ function App() {
               }
             />
 
+                <Route
+              path="/profileupdate"
+              exact
+              element={
+                <Protected isAuth={isAuth}>
 
+                <div className={styles.main}>
+                  <ProfileUpdate  />
+                </div>
+                </Protected>
+              }
+            />
 
             <Route
               path="submit"

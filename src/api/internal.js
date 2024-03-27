@@ -4,7 +4,7 @@ const api= axios.create({
     baseURL: process.env.REACT_APP_INTERNAL_API_PATH,
     withCredentials:true,
     headers: {
-        "Content-Type":"application/json"
+        "Content-Type":"application/json",
     },
 }) 
 
@@ -21,15 +21,16 @@ let response;
     return response;
 }
 
-export const signup= async(data)=>{
-    let response;
+export const signup = async(data)=>{
     try{
-        response = await api.post("/register",data)
+        const response= await api.post("/register",data); 
+        return response;
     }
     catch(error){
-        return error
-    }
-    return response;
+        console.log(error)
+        return error;
+    }   
+
 }
 
 export const signout= async()=>{
@@ -146,6 +147,10 @@ api.interceptors.response.use(
             return error
         }
     }
+    else if(error.response.status===409){
+        return error;
+    }
+    
  }
 
 )

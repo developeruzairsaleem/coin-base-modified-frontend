@@ -21,6 +21,8 @@ function useAutoLogin(){
                 _id:response.data.user._id,
                 email:response.data.user.email,
                 username:response.data.user.username,
+                name:response.data.name||"",
+                profilePhoto:response.data.profilePhoto||"",
                 auth:response.data.auth
                 
             }
@@ -32,6 +34,7 @@ function useAutoLogin(){
         }
         catch(error){
             // handling error
+            console.log("error refreshing the token",error)
         }
 
         finally{

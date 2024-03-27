@@ -24,25 +24,30 @@ function Signup(){
         username:values.username,
         password:values.password,
         confirmPassword:values.confirmPassword,
-        email:values.email
-    }
+        email:values.email,
 
-    const response= await signup(data)
-    if (response.status===201) {
+    }
+    const response= await signup(data);
+    console.log(response)
+
+    if (response?.status===201) {
          const user={
 
             _id:response.data.user._id,
             username:response.data.user.username,
             email:response.data.user.email,
-            auth:response.data.auth
+            auth:response.data.auth,
+            name:response.data.name||"",
+            profilePhoto:response.data.profilePhoto||""
 
 
          }
 
          dispatch(setUser(user));
-         navigate("/")
+         navigate("/");
     }
-    else if(response.code==="ERR_BAD_REQUEST"){
+
+    else if(response?.code==="ERR_BAD_REQUEST"){
         setError(response.response.data.message)
     }
  }

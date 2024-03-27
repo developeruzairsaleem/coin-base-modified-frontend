@@ -7,33 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 
 function Blog(){
-  const [i,setI]=useState(0)
-  const [length,setLength]=useState(0)
-
-
 
   // navigate to the specific blog post detail page
   const navigateToBlogDetail=(blogId)=>()=>{
     navigate(`/blog/${blogId}`)
   }
-
-
-
-const handleNext=()=>{
-if(i<length-10){
-  setI(i+10)
-
-}
-
-}
-
-const handlePrevious=()=>{
-  if(i>0){
-    setI(i-10)
-
-  }
-}
-
 
  const navigate=useNavigate()
 const blogStyle=(url)=>{
@@ -42,8 +20,7 @@ const blogStyle=(url)=>{
     backgroundPosition:"center",
     backgroundRepeat:"no-repeat",
     backgroundSize:"cover",
-    width:"200px",
-    height:"200px",
+
   }
 }
 
@@ -51,13 +28,12 @@ const blogStyle=(url)=>{
     const [content,setContent]=useState("")
   
     useEffect(() => {
-    (async _=>{
+    (async()=>{
     
-      let response=  await blogAll(i) 
+      let response=  await blogAll() 
 
         if(response.status===200){
           setBlogs(response.data.blogs)
-          setLength(response.data.length)
         }
     
     
@@ -69,7 +45,7 @@ const blogStyle=(url)=>{
     
     
     
-    }, [i])
+    }, [])
   
     
 
@@ -84,32 +60,24 @@ const blogStyle=(url)=>{
     return (
   <div className={styles.blogsWrapper}>
 {
-  blogs.map((blog)=>(
+    blogs.map((blog)=>(
 
-<div key={blog._id} className={styles.blog} onClick={navigateToBlogDetail(blog._id)}>
-  <div className={styles.photoCover} style={blogStyle(blog.photo)}>
-  </div>
-  <div className={styles.textCover}>
-  <h2 className={styles.title}>{blog.title}</h2>
-
-  <p className={styles.content}>
-    
-    {
-  `${blog.content.replace(/\|n\|/g,'\n') }
-     ` }
-  </p>
-  </div>
-</div>
-  ))
+    <div key={blog._id} className={styles.blog} onClick={navigateToBlogDetail(blog._id)}>
+      <div className={styles.photoCover} style={blogStyle(blog.photo)}>
+      </div>
+      <div className={styles.textCover}>
+        <h2 className={styles.title}>{blog.title}</h2>
+       {/*<p className={styles.description}>
+          
+          {
+        `${blog.description.replace(/\|n\|/g,'\n') }
+           ` }
+        </p>*/}
+      </div>
+    </div>
+    ))
 }
 
-
-
-
-<div className={styles.buttonSection}>
-  <button disabled={i===0} onClick={handlePrevious}>Previous Page</button>
-  <button disabled={i>=length-10} onClick={handleNext}>Next Page</button>
-</div>
   </div>
 
 
