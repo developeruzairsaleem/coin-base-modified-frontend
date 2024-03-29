@@ -11,16 +11,14 @@ import Protected from "./components/Protected/Protected.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
 import Create from "./pages/Create/Create.jsx";
 import { useSelector } from "react-redux";
-import BlogDetail  from "./pages/BlogDetail/BlogDetail.jsx"
-import UpdateBlog from "./pages/UpdateBlog/UpdateBlog.jsx"
+import BlogDetail  from "./pages/BlogDetail/BlogDetail.jsx";
+import UpdateBlog from "./pages/UpdateBlog/UpdateBlog.jsx";
 import Loader from "./components/Loader/Loader.jsx";
-import useAutoLogin from "./hooks/useAutoLogin.js"
-import ProfileUpdate from "./pages/ProfileUpdate/ProfileUpdate.jsx"
+import useAutoLogin from "./hooks/useAutoLogin.js";
+import ProfileUpdate from "./pages/ProfileUpdate/ProfileUpdate.jsx";
 function App() {
   const isAuth= useSelector(state=>state.user.auth);
-  
-
-  const loading = useAutoLogin()
+  const loading = useAutoLogin();
   return loading?(<Loader text = "..." />) :(
 
     <div className={styles.container}>
@@ -29,11 +27,6 @@ function App() {
           <Navbar />
 
           <Routes>
-
- 
-
-
-
 
             <Route
               path="/"
@@ -45,15 +38,16 @@ function App() {
               }
             />
 
-                <Route
-              path="/profileupdate"
+            <Route
+              path="profileupdate"
               exact
               element={
                 <Protected isAuth={isAuth}>
 
-                <div className={styles.main}>
-                  <ProfileUpdate  />
-                </div>
+                  <div className={styles.main}>
+                    <ProfileUpdate  />
+                  </div>
+
                 </Protected>
               }
             />

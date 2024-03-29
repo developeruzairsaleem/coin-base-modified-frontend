@@ -7,6 +7,6 @@ const signupSchema=yup.object().shape({
     ,password:yup.string().min(8).max(25).matches(passwordPattern,{message:errorMessage}).required("password is required")
     ,confirmPassword:yup.string().oneOf([yup.ref("password" ),"password must match"]).required("password is required")
     ,email:yup.string().email("enter a valid email address").required("email is required")
-})
+});
 
 export default signupSchema;

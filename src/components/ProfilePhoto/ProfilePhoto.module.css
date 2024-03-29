@@ -1,0 +1,10 @@
+.profilePhoto{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color:white;
+}
