@@ -1,14 +1,12 @@
 import {NavLink} from "react-router-dom";
-import styles from "./Navbar.module.css"
+import styles from "./Navbar.module.css";
 import { useSelector } from "react-redux";
-import {signout} from "../../api/internal.js"
+import {signout} from "../../api/internal.js";
 import { resetUser } from "../../store/userSlice";
 import { useDispatch } from "react-redux";
 import ProfilePhoto from "../ProfilePhoto/ProfilePhoto.jsx"
 function Navbar(){
-
-
-const IMAGE_SIZE={
+    const IMAGE_SIZE={
     width:"50px",
     height:"50px",
     fontSize:"17px"
@@ -21,12 +19,12 @@ const dispatch=useDispatch()
 
 
     }
-const isAuthenticated= useSelector(state=>state.user.auth);
+const {auth:isAuthenticated}= useSelector(state=>state.user);
     return (
         <>
             <nav className={styles.navbar}>
                 <div className={styles.left}>
-            <NavLink to="/" className={`${styles.logo} ${styles.inActiveStyle}`}>{"Coin Bounce"}</NavLink>
+            <NavLink to="/" className={`${styles.logo} ${styles.inActiveStyle}`}>Coin<span className="">Bounce</span></NavLink>
 
                 </div>
                 <div className={styles.center}>
@@ -49,13 +47,20 @@ const isAuthenticated= useSelector(state=>state.user.auth);
 
                 <div className={styles.right}>
 
-            {isAuthenticated?<NavLink ><button onClick={handleSignout} className={styles.logoutButton} >Logout</button></NavLink>:<><NavLink to="login" className={({isActive})=>isActive?styles.activeStyle:styles.inActiveStyle}><button className={styles.logInButton} >Login</button></NavLink>
-            <NavLink to="signup" className={({isActive})=>isActive?styles.activeStyle:styles.inActiveStyle}><button className={styles.signUpButton} >Signup</button></NavLink>
-            </>}
-            <ProfilePhoto name={"Uzair"} photo={"https://avatars.githubusercontent.com/u/119891591?v=4"} size={IMAGE_SIZE}/>
+            {isAuthenticated?(<>
+            
             <ProfilePhoto name={"Saleem"} photo={""} size={IMAGE_SIZE}/>
 
+            </>):
+            
+            <><NavLink to="login" className={({isActive})=>isActive?styles.activeStyle:styles.inActiveStyle}><button className={styles.logInButton} >Login</button></NavLink>
+            <NavLink to="signup" className={({isActive})=>isActive?styles.activeStyle:styles.inActiveStyle}><button className={styles.signUpButton} >Signup</button></NavLink>
+            </>}
+            {/* <ProfilePhoto name={"Uzair"} photo={"https://avatars.githubusercontent.com/u/119891591?v=4"} size={IMAGE_SIZE}/>
+            <ProfilePhoto name={"Saleem"} photo={""} size={IMAGE_SIZE}/>
+             */}
 
+{/* <NavLink ><button onClick={handleSignout} className={styles.logoutButton} >Logout</button></NavLink> */}
                 </div>
             </nav>
             <div className={styles.separator}>
