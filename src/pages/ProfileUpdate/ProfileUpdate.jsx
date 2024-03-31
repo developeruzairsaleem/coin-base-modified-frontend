@@ -1,6 +1,10 @@
 import React, { useState } from "react"
 import TextInput from "../../components/TextInput/TextInput";
 import ProfilePhoto from "../../components/ProfilePhoto/ProfilePhoto";
+import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+
+
 // 1 get the profile photo if available
 // 2 show the profile photo if available
 // 3 else show the first letter of their name
@@ -20,7 +24,7 @@ const ProfileUpdate =()=>{
 	const [username,setUsername] = useState(user.username);
 
 	return (
-		<div className =" border w-8/12 border-gray-300 rounded-lg p-5 mx-auto">
+		<div className =" border w-8/12 border-gray-300 rounded-lg p-5 mx-auto my-5 shadow-md">
 			<h1 className=" text-center text-gray-500 font-semibold text-xl">{"Update your profile"}</h1>	
 			<div className="my-10 flex justify-between items-center">
 				<ProfilePhoto name={user.name} size={imageSize}/>
@@ -35,6 +39,7 @@ const ProfileUpdate =()=>{
 				<TextInput 
 		    		type="text"
     				name="name"
+					id="name"
     				value={name}
     				onChange={(e)=>setName(e.target.value)}
       				placeholder="Name"
@@ -48,6 +53,7 @@ const ProfileUpdate =()=>{
 				<TextInput 
 		    		type="text"
     				name="username"
+					id="username"
     				value={username}
     				onChange={(e)=>setUsername(e.target.value)}
       				placeholder="Username"
