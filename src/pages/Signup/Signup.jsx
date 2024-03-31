@@ -37,8 +37,8 @@ function Signup(){
             username:response.data.user.username,
             email:response.data.user.email,
             auth:response.data.auth,
-            name:response.data.name||"",
-            profilePhoto:response.data.profilePhoto||""
+            name:response.data.user.name||"",
+            profilePhoto:response.data.user.profilePhoto||""
 
 
          }

@@ -21,8 +21,8 @@ function useAutoLogin(){
                 _id:response.data.user._id,
                 email:response.data.user.email,
                 username:response.data.user.username,
-                name:response.data.name||"",
-                profilePhoto:response.data.profilePhoto||"",
+                name:response.data.user.name||"hello",
+                profilePhoto:response.data.user.profilePhoto||"",
                 auth:response.data.auth
                 
             }
