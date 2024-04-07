@@ -6,7 +6,7 @@ const ProfilePhoto=({photo,name,size,onClick})=>{
 
 	if(photo){
 		return (
-			<div onClick={onClick} className={`${styles.profilePhoto} cursor-pointer `} style={{...size,background:`url(${photo})`,backgroundPosition:"center",backgroundRepeat:'no-repeat',backgroundSize:"cover"}}>									
+			<div onClick={onClick} className={`${styles.profilePhoto} cursor-pointer `} style={{...size,backgroundImage:`url(${photo})`,backgroundPosition:"center",backgroundRepeat:'no-repeat',backgroundSize:"cover"}}>									
 			</div>
 			)
 	}

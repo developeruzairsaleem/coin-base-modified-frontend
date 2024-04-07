@@ -3,6 +3,7 @@ import TextInput from "../../components/TextInput/TextInput";
 import ProfilePhoto from "../../components/ProfilePhoto/ProfilePhoto";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 // 1 get the profile photo if available
@@ -10,7 +11,6 @@ import { useDispatch } from "react-redux";
 // 3 else show the first letter of their name
 //state for the  photo keeping
 // sending the data to the backend for the user update (have to create a controller in backend for user update)
-import { useSelector } from "react-redux";
 
 const ProfileUpdate =()=>{
 	const imageSize={
@@ -22,28 +22,155 @@ const ProfileUpdate =()=>{
 	const user = useSelector(state=>state.user);
 	const [name,setName] = useState(user.name);
 	const [username,setUsername] = useState(user.username);
+    const [profilePhoto, setProfilePhoto] = useState(user.profilePhoto);
+    const [dataToSend, setDataToSend] = useState({name:user.name,username:user.username});
+    const [photoError, setPhotoError] = useState("");
+    const [nameError, setNameError] = useState("");
+    const [usernameError, setUsernameError] = useState("");
+    const [nameTouched, setNameTouched] = useState(false);
+    const [usernameTouched, setUsernameTouched] = useState(false);
+
+    const handlePhotoChange= (e) => {
+        const file = e.target.files[0];
+        if(file){
+            if(file.type && !file.type.startsWith("image/")){
+                setPhotoError("File is not a valid image.");
+                return;
+            }
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload=()=>{
+                setProfilePhoto(reader.result);
+                setDataToSend({...dataToSend,profilePhoto:reader.result});
+                setPhotoError("");
+            }
+        }
+
+    }
+
+
+
+
+    const handlePhotoRemove=()=>{
+        setDataToSend({...dataToSend,profilePhoto:""});
+        setProfilePhoto("");
+        setPhotoError(" ")
+    }
+
+
+    const handleReset=()=>{
+        setName(user.name)
+        setUsername(user.username)
+        setDataToSend({name:user.name,username:user.username});
+        setProfilePhoto(user.profilePhoto);
+        setPhotoError("");
+        setNameError("");
+        setUsernameError("");
+        setNameTouched(false);
+        setUsernameTouched(false);
+
+    };
+
+    const handleUpdate=()=>{
+
+        
+
+
+
+
+    }
+
+    //ONGOING TASK 
+    /////////////////////////////////////////////////////////////    
+    //--------------------------------------------------------------------------------------------
+    // validation and showing error for photo, name and username and uploading the data to backend 
+    //---------------------------------------------------------------------------------------------
+
+    const validateName=(name)=>{
+        if(typeof name !== "string" ){
+            return "Enter a valid string";
+        }
+        else if( name.length === 0){
+            return "name is required";
+        }
+        else if(name.length >  30){
+            return "Name must not exceed 30 characters";
+       }
+       else if (name.length < 5){
+         return "name must be atleast 5 characters";
+       }
+       else{
+            return "";
+       }
+    }
+
+    const validateUsername=(username)=>{
+        if(typeof username !== "string"){
+           return "Enter a valid string"
+        }
+        else if(username.length===0){
+            return "username is required"
+        }
+        else if(username.length>30){
+            return "username must not exceed 30 characters"
+        }
+        else if(username.length<5){
+            return "username must be atleast 5 characters";
+        }
+        else{
+            return "";
+        }
+
+    }
+    
+    //--------------------------------------------------------------------------------------------
+    // validation and showing error for photo, name and username and uploading the data to backend 
+    //--------------------------------------------------------------------------------------------
+    /////////////////////////////////////////////////////////////    
+    //ONGOING TASK 
+    
+
+
+
 
 	return (
 		<div className =" border w-8/12 border-gray-300 rounded-lg p-5 mx-auto my-5 shadow-md">
 			<h1 className=" text-center text-gray-500 font-semibold text-xl">{"Update your profile"}</h1>	
 			<div className="my-10 flex justify-between items-center">
-				<ProfilePhoto name={user.name} size={imageSize}/>
+				<ProfilePhoto photo={profilePhoto} name={user.name} size={imageSize}/>
 				<div className="flex gap-3">
-					<button className="border rounded-lg border-blue-500 text-white bg-blue-500 p-2 " >Add Photo</button>
-					<button className="border rounded-lg border-red-500 bg-red-500 text-white p-2">Remove Photo</button>
+					<button className="">
+                    <label htmlFor="profilephoto" className="h-full w-full block bg-blue-500 p-2 border rounded-lg border-blue-500 text-white hover:bg-blue-600 hover:cursor-pointer"> 
+                    <input  className="hidden" name="profilephoto" id="profilephoto" type="file" onChange={handlePhotoChange} />
+                    Add Photo
+                    </label>
+                    </button>
+
+					<button className="border rounded-lg border-red-500 bg-red-500 text-white p-2 hover:bg-red-600  " onClick={handlePhotoRemove} >Remove Photo</button>
 				</div>
 			</div>
+                    {photoError&&(<div className="text-red-600">{photoError}</div>)}
 
-			<div className="">
+			<div>
 				<label htmlFor="name">Name:</label>
 				<TextInput 
 		    		type="text"
     				name="name"
 					id="name"
     				value={name}
-    				onChange={(e)=>setName(e.target.value)}
+    				onChange={(e)=>{
+                        setName(e.target.value)
+                        setDataToSend({...dataToSend,name:e.target.value});
+                        setNameError(validateName(e.target.value))
+                    }}
       				placeholder="Name"
+                    error={nameError&&nameTouched}
+                    onBlur={_=>{
+                        setNameTouched(true);
+                    }}
+                    errorMessage={nameError}
 			    />
+
 			</div>
 
 
@@ -55,26 +182,36 @@ const ProfileUpdate =()=>{
     				name="username"
 					id="username"
     				value={username}
-    				onChange={(e)=>setUsername(e.target.value)}
+    				onChange={(e)=>{
+                        setUsername(e.target.value)
+                        setDataToSend({...dataToSend,username:e.target.value})
+                        setUsernameError(validateUsername(e.target.value))
+                        }}
       				placeholder="Username"
+                    onBlur={_=>{
+                        setUsernameTouched(true)
+                    }}
+                    error={usernameError&&usernameTouched}
+                    errorMessage={usernameError}
 				/>
 			</div>
 
 			<div className="flex justify-end gap-3">
-				<button className="border rounded-lg border-red-500 text-red-500 p-2">Cancel</button>
-				<button className="border rounded-lg border-blue-500 text-white bg-blue-500 p-2 ">Update</button>
+				<button handle className="border rounded-lg border-red-500 text-red-500 p-2" onClick={handleReset} >Reset</button>
+				<button className="border rounded-lg border-blue-500 text-white bg-blue-500 p-2" disabled={photoError||nameError||usernameError}  onClick={handleUpdate} >Update</button>
 			</div>
 		</div>
-		)
+		);
+
 }
 
 
 
-
 export default ProfileUpdate;
-/*
 
 
+
+{/*
 
 
 import { useState } from "react";
@@ -213,4 +350,4 @@ return(
     {error!=""?<p className={styles.errorMessage}>{error}</p>:""}
 </div>
 )
-*/
+*/}
