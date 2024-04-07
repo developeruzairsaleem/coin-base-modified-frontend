@@ -44,6 +44,18 @@ export const signout= async()=>{
 
     return response
 }
+
+export const profileUpdate= async (dataToSend)=>{
+    let response;
+    try{
+     response = await api.put("/profile",dataToSend)
+    }
+    catch(error){
+        return error
+    }
+    return response;
+}
+
 export const blogAll= async(data)=>{
     let response;
     try{

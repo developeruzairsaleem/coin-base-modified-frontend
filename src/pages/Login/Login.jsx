@@ -38,7 +38,7 @@ navigate("/");
 }
 else if(response.code==="ERR_BAD_REQUEST"){
     // display error
-setError(response.data.message)
+setError(response.data.message);
 }
 
     }

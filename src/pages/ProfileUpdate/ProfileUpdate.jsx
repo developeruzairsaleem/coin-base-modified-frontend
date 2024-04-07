@@ -4,6 +4,11 @@ import ProfilePhoto from "../../components/ProfilePhoto/ProfilePhoto";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import {setUser} from "../../store/userSlice"
+import {useNavigate} from "react-router-dom";
+import {profileUpdate} from "../../api/internal";
+import { TailSpin } from "react-loader-spinner";
+
 
 
 // 1 get the profile photo if available
@@ -29,7 +34,11 @@ const ProfileUpdate =()=>{
     const [usernameError, setUsernameError] = useState("");
     const [nameTouched, setNameTouched] = useState(false);
     const [usernameTouched, setUsernameTouched] = useState(false);
+    const [uploading,setUploading] = useState(false);
+    const [error, setError] = useState("");
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const handlePhotoChange= (e) => {
         const file = e.target.files[0];
         if(file){
@@ -54,7 +63,7 @@ const ProfileUpdate =()=>{
     const handlePhotoRemove=()=>{
         setDataToSend({...dataToSend,profilePhoto:""});
         setProfilePhoto("");
-        setPhotoError(" ")
+        setPhotoError("")
     }
 
 
@@ -68,15 +77,35 @@ const ProfileUpdate =()=>{
         setUsernameError("");
         setNameTouched(false);
         setUsernameTouched(false);
+        setError("")
 
     };
 
-    const handleUpdate=()=>{
+    const handleUpdate=async()=>{
+        setUploading(true);
+        const response = await profileUpdate(dataToSend);
+        setUploading(false);
+        console.log(response, "response here")
+        if(response.status===200){
+            setError("")
+            const data = {
+                name:response.data.data.name,
+                username:response.data.data.username,
+                _id:response.data.data._id,
+                email:response.data.data.email,
+                profilePhoto:response.data.data.profilePhoto,
+                auth:true
+            }
+            dispatch(setUser(data));
+            navigate("/");
 
-        
+        }
 
 
 
+        if(response?.code===("ERR_BAD_REQUEST"||"ERR_BAD_RESPONSE")){
+            setError("Unable to upload");
+        }
 
     }
 
@@ -135,6 +164,15 @@ const ProfileUpdate =()=>{
 
 	return (
 		<div className =" border w-8/12 border-gray-300 rounded-lg p-5 mx-auto my-5 shadow-md">
+          {
+            uploading &&
+           (<div className="fixed w-full h-full bg-blue-200 opacity-70 top-0 left-0" >
+                               <div className="flex justify-center items-center h-screen flex-col gap-3">
+                                   <div className="animate-spin rounded-full h-16 w-16 border-t-2  border-r-2 border-b-2 border-blue-500"></div>
+                                   <p className="">Updating Profile</p>
+                               </div>
+                       </div>)
+          } 
 			<h1 className=" text-center text-gray-500 font-semibold text-xl">{"Update your profile"}</h1>	
 			<div className="my-10 flex justify-between items-center">
 				<ProfilePhoto photo={profilePhoto} name={user.name} size={imageSize}/>
@@ -198,8 +236,9 @@ const ProfileUpdate =()=>{
 
 			<div className="flex justify-end gap-3">
 				<button handle className="border rounded-lg border-red-500 text-red-500 p-2" onClick={handleReset} >Reset</button>
-				<button className="border rounded-lg border-blue-500 text-white bg-blue-500 p-2" disabled={photoError||nameError||usernameError}  onClick={handleUpdate} >Update</button>
+				<button className="border rounded-lg border-blue-500 text-white bg-blue-500 disabled:bg-blue-300 disabled:border-blue-300 hover:bg-blue-600 hover:border-blue-600 p-2" disabled={photoError||nameError||usernameError}  onClick={handleUpdate} >Update</button>
 			</div>
+            <p className="text-red-600">{error&&error}</p>
 		</div>
 		);
 
