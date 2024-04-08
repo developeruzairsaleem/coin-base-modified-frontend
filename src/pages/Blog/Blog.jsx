@@ -56,28 +56,56 @@ const blogStyle=(url)=>{
         <Loader text="Blogs" />
       )
     }
+    console.log(blogs)
 
     return (
-  <div className={styles.blogsWrapper}>
-{
-    blogs.map((blog)=>(
+      <div className={styles.main} >
+        <div className={styles.sideBar} >
+          <h2 className={styles.sideHeading}>Categories</h2>
 
-    <div key={blog._id} className={styles.blog} onClick={navigateToBlogDetail(blog._id)}>
-      <div className={styles.photoCover} style={blogStyle(blog.photo)}>
-      </div>
-      <div className={styles.textCover}>
-        <h2 className={styles.title}>{blog.title}</h2>
-       {/*<p className={styles.description}>
-          
-          {
-        `${blog.description.replace(/\|n\|/g,'\n') }
-           ` }
-        </p>*/}
-      </div>
-    </div>
+          <ul className={styles.sideList} >
+            <li className={styles.sideItem}>All</li>
+            <li className={styles.sideItem}>Technology</li>
+            <li className={styles.sideItem}>Life Style</li>
+            <li className={styles.sideItem}>Travel</li>
+            <li className={styles.sideItem}>Food</li>
+            <li className={styles.sideItem}>Finance</li>
+            <li className={styles.sideItem}>Education</li>
+            <li className={styles.sideItem}>Business</li>
+            <li className={styles.sideItem}>Arts and Culture</li>
+            <li className={styles.sideItem}>Parenting</li>
+            <li className={styles.sideItem}>Sports</li>
+            <li className={styles.sideItem}>Environment</li>
+            <li className={styles.sideItem}>Politics</li>
+            <li className={styles.sideItem}>Health and Wellness</li>
+            <li className={styles.sideItem}>Entertainment</li>
+            <li className={styles.sideItem}>Science</li>
+          </ul>
+
+        </div>
+        
+        <div className={styles.blogsWrapper}>
+        <input type ="text" placeholder=" Search blog post " className={styles.searchBar} />
+      {
+          blogs.map((blog)=>(
+
+          <div key={blog._id} className={styles.blog} onClick={navigateToBlogDetail(blog._id)}>
+            <div className={styles.photoCover} style={blogStyle(blog.photo)}>
+            </div>
+            <div className={styles.textCover}>
+              <h2 className={styles.title}>{blog.title}</h2>
+              <p className={styles.description}>
+                
+                {
+              `${blog.description.replace(/\|n\|/g,'\n') }
+                 `}
+              </p>
+            </div>
+          </div>
     ))
 }
 
+      </div>
   </div>
 
 

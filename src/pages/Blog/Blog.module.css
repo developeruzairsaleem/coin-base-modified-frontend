@@ -1,12 +1,46 @@
 
+.main{
+    margin: 0 auto;
+    max-width: 1300px;
+    display:flex;
+    width: 100%;
+    padding: 1rem;
+}
+
+
+.sideBar{
+    width: 30%;
+    border:1px solid lightgrey;
+    padding: 2rem;
+
+}
+
+.sideHeading{
+    font-size:1.3em;
+    font-weight:600;
+    margin-bottom: 2rem;
+}
+
+.sideList{
+    height:80vh;
+    overflow-y: scroll;
+
+}
+
+.sideItem{
+    padding: 1rem 0;
+    border-bottom: 1px solid lightgrey;
+}
+
 .blogsWrapper{
-    margin: 50px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 1300px;
-    width: 100%;
+    width: 70%;
+}
+.searchBar{
+
 }
 
 .blog{
@@ -23,24 +57,23 @@
 
 .title{
     text-align: left;
-    margin: 15px 0;
-/*    background-color: inherit;*/
     font-size: 2rem;
 }
 
 .textCover{
     background-color: inherit;  
     width:70%;
+    flex:1;
 }
 .photoCover{
-    width: 30%;
-    height: 300px;
+    width: 10rem;
+    height: 10rem;
     border-radius: 20px;
 }
 
 .content{
     background-color: inherit;
-    margin-top: 20px;
+/*    margin-top: 20px;*/
     font-weight: bold;
     text-align: left;
     white-space: pre-line;
