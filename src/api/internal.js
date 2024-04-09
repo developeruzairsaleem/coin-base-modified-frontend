@@ -56,10 +56,10 @@ export const profileUpdate= async (dataToSend)=>{
     return response;
 }
 
-export const blogAll= async(data)=>{
+export const blogAll= async()=>{
     let response;
     try{
-        response= await api.get("/blog/all/"+data)
+        response= await api.get("/blog/all")
         
 
     }

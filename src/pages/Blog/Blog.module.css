@@ -16,13 +16,13 @@
 }
 
 .sideHeading{
-    font-size:1.3em;
+    font-size:1.3rem;
     font-weight:600;
     margin-bottom: 2rem;
 }
 
 .sideList{
-    height:80vh;
+    height:60vh;
     overflow-y: scroll;
 
 }
@@ -35,29 +35,39 @@
 .blogsWrapper{
     display: flex;
     flex-direction: column;
-    align-items: center;
+/*    align-items: center;*/
     flex-wrap: wrap;
     width: 70%;
 }
-.searchBar{
-
+.author{
+    display:flex;
+    align-items:center;
+    gap: 1rem;
+}
+.authorUsername{
+    font-size:1rem;
+    text-transform: capitalize;
+}
+.blogCreatedAt{
+    font-size:1rem;
+    color: grey;
 }
 
 .blog{
-    width: 100%;
-    padding: 1rem;
+    width: calc(100% - 1rem);
     color:black;
     display: flex;
-    gap: 3rem;
+    gap: 1rem;
     justify-content:space-between;
-}
-.blog:hover .title{
-    color:#3861fb
+    border-bottom:1px solid lightgrey;
+    padding: 1rem 0;
+    margin: 0 0 0 1rem;
 }
 
 .title{
     text-align: left;
-    font-size: 2rem;
+    font-size: 1.4rem;
+    font-weight:600;
 }
 
 .textCover{
@@ -70,20 +80,26 @@
     height: 10rem;
     border-radius: 20px;
 }
-
-.content{
-    background-color: inherit;
-/*    margin-top: 20px;*/
-    font-weight: bold;
-    text-align: left;
-    white-space: pre-line;
+.buttonCover{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.category{
+    padding: .5rem;
+    border-radius:1rem;
+    background-color:lightgrey;
+    color: grey;
+}
+.readButton{
+/*    background-color:blue;*/
+background-color:#3b82f6;
+color:white;
+padding: .7rem;
+border-radius:10px;
 }
 
-.description{
-    background-color: inherit;
-    font-size:1.2rem;
-    line-height: 1.3;
-/*    letter-spacing: 1px;*/
-    word-spacing: 3px;
-    color: grey;
+.readButton:hover{
+    background-color:#2563eb;
+    transition: all .3s ;
 }
