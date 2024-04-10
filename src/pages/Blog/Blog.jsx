@@ -16,6 +16,8 @@ function Blog() {
         fontSize: "17px",
     };
 
+    const categories = ["all", "technology", "life style", "travel", "food", "finance", "education","business","arts and culture","parenting", "sports", "environment", "politics", "health and wellness", "entertainment", "science"];
+
     // navigate to the specific blog post detail page
     const navigateToBlogDetail = (blogId) => () => {
         navigate(`/blog/${blogId}`)
@@ -34,7 +36,8 @@ function Blog() {
 
     const [blogs, setBlogs] = useState([]);
     const [content, setContent] = useState("");
-    const [searchString, setSearchString] = useState("")
+    const [searchString, setSearchString] = useState("");
+    const [activeCategory, setActiveCategory] =  useState("all");
 
     useEffect(() => {
         (async () => {
@@ -62,6 +65,10 @@ function Blog() {
       setSearchString(searchValue);
     }
 
+    const handleCategoryClick=(category)=>{
+      setActiveCategory(category)
+    }
+
 
 
 
@@ -77,22 +84,11 @@ function Blog() {
         <div className={styles.sideBar} >
           <h2 className={styles.sideHeading}>Categories</h2>
           <ul className={styles.sideList} >
-            <li className={styles.sideItem}>All</li>
-            <li className={styles.sideItem}>Technology</li>
-            <li className={styles.sideItem}>Life Style</li>
-            <li className={styles.sideItem}>Travel</li>
-            <li className={styles.sideItem}>Food</li>
-            <li className={styles.sideItem}>Finance</li>
-            <li className={styles.sideItem}>Education</li>
-            <li className={styles.sideItem}>Business</li>
-            <li className={styles.sideItem}>Arts and Culture</li>
-            <li className={styles.sideItem}>Parenting</li>
-            <li className={styles.sideItem}>Sports</li>
-            <li className={styles.sideItem}>Environment</li>
-            <li className={styles.sideItem}>Politics</li> 
-            <li className={styles.sideItem}>Health and Wellness</li>
-            <li className={styles.sideItem}>Entertainment</li>
-            <li className={styles.sideItem}>Science</li>
+          {
+            categories.map(category=>{
+              return <li onClick={_=> handleCategoryClick(category)} className={`${styles.sideItem} ${activeCategory===category?"bg-blue-50":""}`}>{category}</li>
+            })
+          }
           </ul>
 
         </div>

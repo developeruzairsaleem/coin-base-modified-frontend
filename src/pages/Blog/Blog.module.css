@@ -5,39 +5,55 @@
     display:flex;
     width: 100%;
     padding: 1rem;
+/*    max-height: 75vh;*/
 }
 
 
 .sideBar{
-    width: 30%;
+    width: 20%;
     border:1px solid lightgrey;
-    padding: 2rem;
+    border-radius:10px;
+    max-height: 70vh;
+    overflow:scroll;
+
+
 
 }
 
 .sideHeading{
     font-size:1.3rem;
     font-weight:600;
-    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color:white;
+    display:block;
+    width:inherit;
 }
 
 .sideList{
-    height:60vh;
-    overflow-y: scroll;
+    padding: 1rem;
 
 }
 
 .sideItem{
-    padding: 1rem 0;
+    padding: .5rem 0;
     border-bottom: 1px solid lightgrey;
+    color:darkgrey;
+}
+.sideItem:hover{
+    color: grey;
+    cursor: pointer;
 }
 
 .blogsWrapper{
     display: flex;
     flex-direction: column;
 /*    align-items: center;*/
-    flex-wrap: wrap;
-    width: 70%;
+/*    flex-wrap: wrap;*/
+    width: 80%;
+/*    height:70vh;*/
+    max-height: 70vh;
+
+    overflow-y:scroll;
 }
 .author{
     display:flex;
