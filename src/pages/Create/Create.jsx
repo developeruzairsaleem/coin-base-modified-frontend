@@ -1,45 +1,17 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import {Editor, EditorState} from 'draft-js';
- 
-// function MyEditor() {
-//   const [editorState, setEditorState] = React.useState(
-//     EditorState.createEmpty()
-//   );
- 
-//   const editor = React.useRef(null);
- 
-//   function focusEditor() {
-//     editor.current.focus();
-//   }
- 
-//   React.useEffect(() => {
-//     focusEditor()
-//   }, []);
- 
-//   return (
-//     <div onClick={focusEditor}>
-//       <Editor
-//         ref={editor}
-//         editorState={editorState}
-//         onChange={editorState => setEditorState(editorState)}
-//       />
-//     </div>
-//   );
-// }
-
 
 
 import React,{useState } from "react";
 import { submitBlog } from "../../api/internal";
 import { useSelector } from "react-redux"; 
+import TextEditor from "../../components/TextEditor/TextEditor";
 import TextInput from "../../components/TextInput/TextInput";
 import styles from "./Create.module.css"
 import { useNavigate } from "react-router-dom";
-import {Editor, EditorState} from "draft-js";
+// import {Editor, EditorState, RichUtils, Modifier} from "draft-js";
+// import 'draft-js/dist/Draft.css';
 
 
-// 
+// Create function to create a blog post for the first time
 
 function Create(){
 
@@ -47,8 +19,8 @@ function Create(){
   const [content,setContent]=useState("");
   const [description,setDescription]=useState("");
   const [photo,setPhoto]=useState("");
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const editor = React.useRef(null);
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  // const editor = React.useRef(null);
   const author = useSelector((state)=>state.user._id);
   const navigate=useNavigate();
   //----------------------------------
@@ -56,10 +28,6 @@ function Create(){
   //----------------------------------
 
 
-
-  const focusEditor=()=>{
-    editor.current.focus();
-  }
   const handleSubmit = async () => {
 
     //---------------------------------------------------
@@ -77,6 +45,12 @@ function Create(){
     }
 
   }
+
+
+  //--------------------------------------------
+  // Handling the entities in the content state
+  //--------------------------------------------
+
 
 
   //----------------------------------------------------------------------------
@@ -97,6 +71,10 @@ function Create(){
 
 
 
+
+
+
+
   return (
       <div className={styles.wrapper}>
         <div  className={styles.header} >Create a blog</div>
@@ -106,9 +84,52 @@ function Create(){
           value={title}
           onChange={(e)=>setTitle(e.target.value)}
           placeholder="title"
-          style={{width:"60%"}}
         />
+
+
+
+      <TextEditor/>
      
+     
+
+     <button className={styles.submit} disabled={title===""||content===""||photo===""} onClick={handleSubmit} >Submit</button>
+
+
+      
+    </div>
+  )
+
+}
+
+
+export default Create;
+
+
+
+
+/////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {/*
@@ -153,23 +174,6 @@ function Create(){
      {/*</div>*/}
 
 
-        <div width={"100px"} height={"200px"} onClick={ focusEditor } >
-          <Editor
-            ref={editor}
-            editorState={editorState}
-            onChange={eState=>setEditorState(eState)}
-          />
-        </div>
-     
-
-     <button className={styles.submit} disabled={title===""||content===""||photo===""} onClick={handleSubmit} >Submit</button>
 
 
-      
-    </div>
-  )
 
-}
-
-
-export default Create;
