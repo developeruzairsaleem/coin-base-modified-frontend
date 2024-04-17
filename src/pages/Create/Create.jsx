@@ -1,5 +1,3 @@
-
-
 import React,{useState } from "react";
 import { submitBlog } from "../../api/internal";
 import { useSelector } from "react-redux"; 
@@ -7,9 +5,7 @@ import TextEditor from "../../components/TextEditor/TextEditor";
 import TextInput from "../../components/TextInput/TextInput";
 import styles from "./Create.module.css"
 import { useNavigate } from "react-router-dom";
-// import {Editor, EditorState, RichUtils, Modifier} from "draft-js";
-// import 'draft-js/dist/Draft.css';
-
+import BlogCategory from "../../components/BlogCategory/BlogCategory"
 
 // Create function to create a blog post for the first time
 
@@ -17,10 +13,8 @@ function Create(){
 
   const [title,setTitle]=useState("");
   const [content,setContent]=useState("");
-  const [description,setDescription]=useState("");
   const [photo,setPhoto]=useState("");
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  // const editor = React.useRef(null);
+  const [category, setCategory] = useState("Choose");
   const author = useSelector((state)=>state.user._id);
   const navigate=useNavigate();
   //----------------------------------
@@ -35,7 +29,7 @@ function Create(){
     //---------------------------------------------------
 
     let data = {
-      title,content,photo,author,description
+      title,content,photo,author,category
     };
 
     const response =  await submitBlog(data);
@@ -48,8 +42,17 @@ function Create(){
 
 
   //--------------------------------------------
-  // Handling the entities in the content state
+  // Handling category click
   //--------------------------------------------
+
+  const handleCategoryClick=(category)=>()=>{
+      setCategory(category);
+      console.log(category)
+  }
+
+
+
+
 
 
 
@@ -78,6 +81,7 @@ function Create(){
   return (
       <div className={styles.wrapper}>
         <div  className={styles.header} >Create a blog</div>
+        <BlogCategory category={category} handleCategoryClick={handleCategoryClick  }/>
         <TextInput
           type="text"
           name="title"
@@ -87,8 +91,7 @@ function Create(){
         />
 
 
-
-      <TextEditor/>
+      <TextEditor value={content} setValue={setContent}/>
      
      
 

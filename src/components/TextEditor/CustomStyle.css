@@ -1,0 +1,20 @@
+/* CustomStyles.css */
+.ql-toolbar {
+/*  background-color: #333;  Dark toolbar background */
+  border-radius: 10px 10px 0 0;
+  border:none;
+}
+
+.ql-container {
+  outline: none;
+  overflow:hidden;
+  border-radius:0px 0px 10px 10px;
+  max-width: 100%;
+}
+
+.ql-editor {
+  min-height: 250px; /* Minimum height for the editor */
+  border: none;
+  outline: none;
+  overflow: hidden;
+}
