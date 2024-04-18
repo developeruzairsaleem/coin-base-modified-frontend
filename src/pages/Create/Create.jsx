@@ -7,6 +7,31 @@ import styles from "./Create.module.css"
 import { useNavigate } from "react-router-dom";
 import BlogCategory from "../../components/BlogCategory/BlogCategory"
 
+
+
+
+
+
+  const categories =[
+    "technology",
+    "life style",
+    "travel",
+    "food",
+    "finance",
+    "education",
+    "business", 
+    "arts and culture",
+    "parenting", 
+    "sports", 
+    "environment", 
+    "politics", 
+    "health and wellness", 
+    "entertainment", 
+    "science"
+    ];
+
+
+
 // Create function to create a blog post for the first time
 
 function Create(){
@@ -14,7 +39,14 @@ function Create(){
   const [title,setTitle]=useState("");
   const [content,setContent]=useState("");
   const [photo,setPhoto]=useState("");
-  const [category, setCategory] = useState("Choose");
+  const [category, setCategory] = useState(categories[0]);
+
+
+  // error handling states
+  const[photoError, setPhotoError] = useState("");
+
+  console.log("my content is", content)
+  // const [category, setCategory] = useState("Choose");
   const author = useSelector((state)=>state.user._id);
   const navigate=useNavigate();
   //----------------------------------
@@ -41,34 +73,30 @@ function Create(){
   }
 
 
-  //--------------------------------------------
-  // Handling category click
-  //--------------------------------------------
-
-  const handleCategoryClick=(category)=>()=>{
-      setCategory(category);
-      console.log(category)
-  }
 
 
 
+// ---------------------------------------------------------
+// handle photo change will be handle here
+// ---------------------------------------------------------
+   const handlePhotoChange= (e) => {
+        const file = e.target.files[0];
+        if(file){
+            if(file.type && !file.type.startsWith("image/")){
+                setPhotoError("File is not a valid image.");
+                return;
+            }
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload=()=>{
+                setPhoto(reader.result);
+                console.log(reader.result)
+                // setDataToSend({...dataToSend,profilePhoto:reader.result});
+                setPhotoError("");
+            }
+        }
 
-
-
-
-  //----------------------------------------------------------------------------
-  // handle the change in the photo and setting the state with new BASE64 String
-  //----------------------------------------------------------------------------
-  const photoChange=(e)=>{
-    const file = e.target.files[0]
-    const reader= new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend=()=>{
-      setPhoto(reader.result)
     }
-
-  }
-
 
 
 
@@ -81,7 +109,6 @@ function Create(){
   return (
       <div className={styles.wrapper}>
         <div  className={styles.header} >Create a blog</div>
-        <BlogCategory category={category} handleCategoryClick={handleCategoryClick  }/>
         <TextInput
           type="text"
           name="title"
@@ -89,13 +116,19 @@ function Create(){
           onChange={(e)=>setTitle(e.target.value)}
           placeholder="title"
         />
+        <BlogCategory selected={category} setSelected={setCategory} categories={categories} />
 
 
       <TextEditor value={content} setValue={setContent}/>
      
-     
+      <div className="w-100 h-10 bg-blue-200">
+        <label className="h-full  w-full block p-2" htmlFor="blogphoto" >
+            Choose Blog Photo
+            <input className="hidden" id="blogphoto"  type="file" onChange={handlePhotoChange} />
+        </label>
+      </div>
 
-     <button className={styles.submit} disabled={title===""||content===""||photo===""} onClick={handleSubmit} >Submit</button>
+      <button className={styles.submit} disabled={title===""||content===""||photo===""} onClick={handleSubmit} >Submit</button>
 
 
       
