@@ -35,20 +35,108 @@ import BlogCategory from "../../components/BlogCategory/BlogCategory"
 // Create function to create a blog post for the first time
 
 function Create(){
-
+  // state of the application
   const [title,setTitle]=useState("");
   const [content,setContent]=useState("");
   const [photo,setPhoto]=useState("");
   const [category, setCategory] = useState(categories[0]);
-
+  const [fileName, setFileName] = useState("");
 
   // error handling states
   const[photoError, setPhotoError] = useState("");
+  const[titleError, setTitleError] = useState("");
+  const[contentError, setContentError] = useState("");
 
-  console.log("my content is", content)
-  // const [category, setCategory] = useState("Choose");
+  // touched states for the inputs
+  const [photoTouched, setPhotoTouched] =  useState(false);
+  const [titleTouched, setTitleTouched] = useState(false);
+  const [contentTouched, setContentTouched] = useState(false);
+
+// already avaiable state from redux store
   const author = useSelector((state)=>state.user._id);
+  console.log(content);
+ 
+
+  // for navigation to other routes on some changes 
   const navigate=useNavigate();
+
+
+
+
+// validating the text data
+
+const validateContent=(content)=>{
+  content = getTextFromHtml(content);
+  if(typeof content !== "string"){
+    setContentError("content is not a valid string")
+  }
+
+  else if(!content){
+    setContentError("content is required");
+  }
+  else if(content.length<50){
+    setContentError("content should be atleast 50 characters long");
+  }
+  else if(content.length>3000){
+    setContentError("the content length should not exceed 3000 characters");
+  }
+  else{
+    setContentError("")
+  }
+
+}
+
+
+const validateTitle=(title)=>{
+  if(typeof title !=="string"){
+    setTitleError("title is not valid string");
+  }
+  else if(!title){
+    setTitleError("title is required");
+  }
+  else if (title.length<20){
+    setTitleError("title must be atleast 20 characters long");
+  }
+  else if(title.length>200){
+    setTitleError("title can have 200 characters atmost");
+  }
+  else {
+    setTitleError("")
+  }
+}
+
+
+
+
+const validatePhoto=()=>{
+  if(!photo){
+    setPhotoError("Photo is required");
+  }
+  else{
+    setPhotoError("")
+  }
+}
+
+
+// handling blur of the content
+  const handleBlur=(content)=>()=>{
+    validateContent(content);
+    setContentTouched(true);
+
+
+  }
+
+
+  // exclude the html from the text
+  const getTextFromHtml = (html) => {
+  return html.replace(/<(?:.|\n)*?>/gm, '').trim();
+};
+ 
+
+
+
+
+
   //----------------------------------
   // submitting the data to the server
   //----------------------------------
@@ -60,8 +148,15 @@ function Create(){
     // storing the data in object to send to the backend
     //---------------------------------------------------
 
+    validatePhoto();
+    validateContent(content);
+    validateTitle(title);
+
+
+
+
     let data = {
-      title,content,photo,author,category
+      title,content,photo,category
     };
 
     const response =  await submitBlog(data);
@@ -81,6 +176,7 @@ function Create(){
 // ---------------------------------------------------------
    const handlePhotoChange= (e) => {
         const file = e.target.files[0];
+        validatePhoto();
         if(file){
             if(file.type && !file.type.startsWith("image/")){
                 setPhotoError("File is not a valid image.");
@@ -90,6 +186,7 @@ function Create(){
             reader.readAsDataURL(file);
             reader.onload=()=>{
                 setPhoto(reader.result);
+                setFileName(file.name);
                 console.log(reader.result)
                 // setDataToSend({...dataToSend,profilePhoto:reader.result});
                 setPhotoError("");
@@ -113,22 +210,46 @@ function Create(){
           type="text"
           name="title"
           value={title}
-          onChange={(e)=>setTitle(e.target.value)}
+          onChange={(e)=>{
+            setTitle(e.target.value)
+            validateTitle(e.target.value);
+          }}
           placeholder="title"
+          onBlur={()=>{
+            setTitleTouched(true);
+            validateTitle(title);
+          }}
         />
+        {titleError && titleTouched&&<p className="text-left w-full my-3  text-red-600">{titleError}</p> }
         <BlogCategory selected={category} setSelected={setCategory} categories={categories} />
 
 
-      <TextEditor value={content} setValue={setContent}/>
+      <TextEditor 
+      value={content} setValue={setContent} handleBlur={handleBlur} validateContent={validateContent} />
+      {contentError&&contentTouched&& <p className="text-left w-full my-3  text-red-600">{contentError}</p>}     
      
-      <div className="w-100 h-10 bg-blue-200">
-        <label className="h-full  w-full block p-2" htmlFor="blogphoto" >
-            Choose Blog Photo
+
+
+
+      <div className="flex items-center   w-full my-3 gap-3">
+        
+      
+      <div className="rounded-md hover:bg-blue-600 cursor-pointer text-white w-60 text-center h-15 bg-blue-500">
+        <label className=" cursor-pointer h-full  w-full block p-3" htmlFor="blogphoto" >
+            Choose A Photo
             <input className="hidden" id="blogphoto"  type="file" onChange={handlePhotoChange} />
         </label>
       </div>
+      {
+        fileName?<p className="text-blue-500 font-bold">{fileName.slice(0,20)+"..."}</p>:<p className="text-blue-500 font-bold">No File Chosen</p>
+      }
+     
 
-      <button className={styles.submit} disabled={title===""||content===""||photo===""} onClick={handleSubmit} >Submit</button>
+      </div>
+
+      {photoError&& <p className="text-left w-full my-3  text-red-600" >{photoError}</p>}
+
+      <button className={styles.submit} disabled={title===""||getTextFromHtml(content)===""||photo===""} onClick={handleSubmit} >Submit</button>
 
 
       
@@ -142,72 +263,6 @@ export default Create;
 
 
 
-
-/////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/*
-      <textarea 
-      name="description"
-      value={description}
-      className={styles.description}
-      placeholder="Your description goes here ..."
-      onChange={(e)=>{
-    
-      setDescription(e.target.value)
-
-
-        }}
-     />
-
-
-     <textarea 
-      name="content"
-      value={content}
-      className={styles.content}
-      // maxLength={400}
-      placeholder="Your content goes here ..."
-      onChange={(e)=>{
-    
-      setContent(e.target.value)
-  
-
-
-        }}
-     />
-     <div className={styles.photoPrompt} >
-        <p>Choose a photo</p>
-        <input
-         type="file"
-         name="photo"
-         id="photo"
-         onChange={photoChange}
-         accept="image/jpg, image/jpeg, image/png"
-              />
-        {photo!==""?<img width={100} src={photo}/>:""}*/}
-     {/*</div>*/}
 
 
 
