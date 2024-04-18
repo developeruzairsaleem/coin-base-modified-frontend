@@ -8,16 +8,17 @@ const ProfileMenu = ({ menuActive, handleClick,handleLogout,handleProfile }) => 
   console.log(user);
 
   return (
-    <div>
+    <div className="">
       <div
-        className={`fixed ${
+        className={`fixed ${  
           menuActive ? "block" : "hidden"
-        } z-10 w-screen h-screen bg-opacity-30 bg-transparent top-0 left-0`}
+        } z-10 w-screen h-screen bg-transparent top-0 left-0`}
         onClick={handleClick}
       ></div>
       <div
-        className={`flex flex-col absolute top-14 border-gray-200 border right-0 z-50 p-2 rounded-xl shadow-md ${menuActive?"block":"hidden"} `}
+        className={`flex flex-col absolute top-14 border-gray-200 border right-0 z-50 p-4 bg-white rounded-xl shadow-md ${menuActive?"block":"hidden"} `}
       >
+
         <div className={"border-b border-gray-300"}>
           <h3 className="p-2 text-md text-gray-600 font-semibold capitalize">
             {user.name}

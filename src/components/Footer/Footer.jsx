@@ -5,7 +5,7 @@ function Footer(){
 
     return (
     <p className={styles.footer}>
-        &copy; {"coin base 2024"}
+        &copy; {"CoinBounce 2024"}
     </p>
     )
 }
