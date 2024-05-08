@@ -1,0 +1,28 @@
+.textInputWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+/*    background-color: orange;*/
+/*    padding:1rem;*/
+    margin: .5rem auto;
+}
+
+.textInputWrapper input{
+
+    padding: .8rem;
+    outline: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    border: 1px solid lightgrey;
+    display:block;
+    width: 100%;
+
+}
+
+.errorMessage{
+    color: #de1b55;
+    text-align: left;
+    width: 100%;
+    padding: 5px;
+}
