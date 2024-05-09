@@ -16,7 +16,7 @@ CoinBounce is a full-stack blog platform designed to provide users with a seamle
 
 ## Technologies Used
 
-- **Frontend:** HTML, CSS, JavaScript, React.js
+- **Frontend:** HTML, CSS, JavaScript, Tailwind, React.js, Redux, Axios
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 - **Authentication:** JSON Web Tokens (JWT)
