@@ -118,3 +118,20 @@
     margin: 10px 0;
     border-bottom: 1px solid lightgray;
 }
+
+
+
+/*setting the styling for the rich text features*/
+/* dangerouslySetInnerHTML={{ __html: replaceWithNewLines(blog.content) }} */
+
+.ql-size-huge{
+    font-size:4rem;
+}
+
+strong{
+    font-weight:700;
+}
+
+ul{
+    list-style: ;
+}

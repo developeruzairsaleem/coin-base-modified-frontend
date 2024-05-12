@@ -116,7 +116,7 @@ return(
         <div className={styles.wrapper} >
             <div className={styles.left}>
 
-                <p className={styles.content}>{replaceWithNewLines(blog.content)}</p>
+                <p className={styles.content}  dangerouslySetInnerHTML={{ __html: replaceWithNewLines(blog.content) }}  ></p>
                 {
                     owns && (
                         <div className={styles.buttonWrapper}>
